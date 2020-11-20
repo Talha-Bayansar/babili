@@ -1,0 +1,29 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Logout</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="all" href="/css/default.css" th:href="@{/css/default.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/startpages.css"/>
+</head>
+
+<body>
+<header></header>
+<main>
+    <i class="material-icons-round md-large md-dark">exit_to_app</i>
+    <h1 class="title">Afmelden</h1>
+    <p>Ben je zeker dat je wilt afmelden?</p>
+    <a id="cancel" class="buttonLook editButton horizontal tile" href="/">
+        <div class="tile-icon"><i class="material-icons-round md-small md-dark">close</i></div>
+        <span>Nee</span>
+    </a>
+    <form id="formLogout" th:action="@{/user/logout}" method="post">
+        <input class="buttonLook editButton horizontal btn btn-primary" type="submit" value="Afmelden"/>
+    </form>
+</main>
+</body>
+</html>

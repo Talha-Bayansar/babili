@@ -1,0 +1,43 @@
+[type=radio] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+[type=radio] + i {
+    cursor: pointer;
+}
+
+[type=radio] i {
+    background-color: transparent;
+}
+
+[type=radio]:checked + i {
+    outline: 2px solid white;
+}
+
+[type=radio]:checked{
+    background-color: var(--color-logo-dark);
+}
+
+[type=radio]:hover{
+    background-color: var(--color-logo-dark);
+}
+/*
+#testStar{
+    position:relative;
+    height:281px;
+    width:450px;
+    margin:0 auto;
+}
+
+#testStar i {
+    position:absolute;
+    left:0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.empty-star:hover {
+    opacity:0;
+}*/

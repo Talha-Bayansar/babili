@@ -1,0 +1,59 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Welkom</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="all" href="/css/default.css" th:href="@{/css/default.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/startpages.css"/>
+    <style>
+        .babsDiv{
+            position: fixed;
+            bottom: 0;
+            right: 100px;
+            width: 290px;
+            height: 300px;
+        }
+        .babsImg{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<header></header>
+<main>
+    <a href="/" class="logo-link"><img id="logo" class="logo" th:src="@{'/images/babiligroen300.png'}" alt="Babili logo"></a>
+    <h1 class="title">WELKOM!</h1>
+    <p>Wij wensen je alvast heel veel succes!</p>
+    <!--hr-->
+    <form id="formLogin" sec:authorize="!isAuthenticated()" th:action="@{/}" method="post">
+        <div class="form-group">
+            <label for="inputUsername">Gebruikersnaam</label>
+            <input type="text" name="username" class="form-control" id="inputUsername" placeholder="Gelieve uw gebruikersnaam in te geven.">
+        </div>
+        <div class="form-group">
+            <label for="inputPassword1">Paswoord</label>
+            <input type="password" name="password" class="form-control" id="inputPassword1" placeholder="Gelieve uw wachtwoord in te geven.">
+        </div>
+        <div th:if="${error != null}">
+            <p class="text-center font-weight-bold text-danger" th:text="${error}"></p>
+        </div>
+        <button type="submit" class="btn btn-primary">Aanmelden</button>
+    </form>
+    <a class="btn btn-primary" href="/user/overview-tasks" sec:authorize="hasAuthority('STUDENT')">Overzicht opdrachten</a>
+    <a class="btn btn-primary" href="/user/overview-tasks" sec:authorize="hasAuthority('TEACHER')">Overzicht cursussen</a>
+    <a id="docent" class="btn btn-primary-outline" href="/user/logout" sec:authorize="isAuthenticated()">Afmelden</a>
+    <p sec:authorize="!isAuthenticated()">Heb je nog geen account?<br>
+        <a href="/register" sec:authorize="!isAuthenticated()">Account aanmaken</a>
+    </p>
+<!--    <div class="babsDiv">-->
+<!--        <img class="babsImg" th:src="'/images/Babs_CloseUp_v001.png'" alt="Babs">-->
+<!--    </div>-->
+</main>
+<footer th:replace="fragments/footer.html :: footer"></footer>
+</body>
+</html>

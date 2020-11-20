@@ -1,0 +1,102 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Nieuwe cursus aanmaken</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="all" href="/css/default.css" th:href="@{/css/default.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/tasks.css"/>
+</head>
+<body>
+<header></header>
+<div id="sidebar">
+    <a href="/" class="logo-link"><img id="logo" alt="Babili" th:src="@{'/images/babiligroen300.png'}"></a>
+    <h1 id="navTitle">Navigatie</h1>
+    <button id="btnToggle" class="navbar-toggler material-icons-round md-small md-dark" type="button"
+            data-toggle="collapse" data-target="#collapseToggle"
+            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        menu
+    </button>
+    <nav id="navToggle" class="nav navbar navbar-light">
+        <div id="collapseToggle" class="collapse navbar-collapse">
+            <a class="navbarItem btn" href="/">
+                <i class="material-icons-round md-small md-dark">home</i>
+                <span class="navbarName">Startpagina</span>
+            </a>
+            <a class="navbarItem btn active" sec:authorize="hasAuthority('STUDENT')" href="/user/overview-tasks">
+                <i class="material-icons-round md-small md-dark">format_list_bulleted</i>
+                <span class="navbarName">Opdrachten</span>
+            </a>
+            <a class="navbarItem btn active" sec:authorize="hasAuthority('TEACHER')" href="/user/overview-tasks">
+                <i class="material-icons-round md-small md-dark">format_list_bulleted</i>
+                <span class="navbarName">Cursussen</span>
+            </a>
+            <a class="navbarItem btn" href="/user/logout">
+                <i class="material-icons-round md-small md-dark">exit_to_app</i>
+                <span class="navbarName">Afmelden</span>
+            </a>
+        </div>
+    </nav>
+</div>
+<main>
+    <h1>Nieuwe opdrachten aanmaken</h1>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <form th:action="@{'new-task'}" method="post">
+                    <div class="filters">
+                        <div class="filterrow mb-2">
+                            <div class="row">
+                                <div class="col-2">
+                                    <label for="titel">Titel van de opdracht:</label>
+                                </div>
+                                <div class="col">
+                                    <input type="text" class="form-control" id="titel" name="titel"
+                                           placeholder="Noteer hier de titel van de opdracht">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filterrow mb-2">
+                            <div class="row">
+                                <div class="col-2">
+                                    <label for="opgave">Beschrijving van de opdracht:</label>
+                                </div>
+                                <div class="col">
+                                    <textarea class="form-control" id="opgave" name="opgave" rows="5"
+                                              placeholder="Geef hier een beschrijving van de opdracht"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filterrow mb-2">
+                            <div class="row">
+                                <div class="col-2">
+                                    <label for="voorbeeld">Geef een voorbeeldzin voor de student:</label>
+                                </div>
+                                <div class="col">
+                                    <textarea class="form-control" id="voorbeeld" name="voorbeeld" rows="5"
+                                              placeholder="Geef hier een voorbeeldzin voor de student."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="filterrow mb-2">
+                            <a th:href="'/user/course/'+${cursussen.get().id}+'/management'">
+                                <input type="button" class="btn btn-primary float-right" value="Annuleren"></a>
+                        </div>
+                        <div class="filterrow">
+
+                            <input type="submit" class="btn btn-primary" value="Opdracht aanmaken">
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<footer th:replace="fragments/footer.html :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Overzicht taken</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="all" href="/css/default.css" th:href="@{/css/default.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/tasks.css"/>
+</head>
+<body>
+<header></header>
+<div id="sidebar">
+    <a href="/" class="logo-link"><img id="logo" alt="Babili" th:src="@{'/images/babiligroen300.png'}"></a>
+    <h1 id="navTitle">Navigatie</h1>
+    <button id="btnToggle" class="navbar-toggler material-icons-round md-small md-dark" type="button"
+            data-toggle="collapse" data-target="#collapseToggle"
+            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        menu
+    </button>
+    <nav id="navToggle" class="nav navbar navbar-light">
+        <div id="collapseToggle" class="collapse navbar-collapse">
+            <a class="navbarItem btn" href="/">
+                <i class="material-icons-round md-small md-dark">home</i>
+                <span class="navbarName">Startpagina</span>
+            </a>
+            <a class="navbarItem btn active" sec:authorize="hasAuthority('STUDENT')" href="/user/overview-tasks">
+                <i class="material-icons-round md-small md-dark">format_list_bulleted</i>
+                <span class="navbarName">Opdrachten</span>
+            </a>
+            <a class="navbarItem btn active" sec:authorize="hasAuthority('TEACHER')" href="/user/overview-tasks">
+                <i class="material-icons-round md-small md-dark">format_list_bulleted</i>
+                <span class="navbarName">Cursussen</span>
+            </a>
+            <a class="navbarItem btn" href="/user/logout">
+                <i class="material-icons-round md-small md-dark">exit_to_app</i>
+                <span class="navbarName">Afmelden</span>
+            </a>
+        </div>
+    </nav>
+</div>
+<main>
+    <h1>Inleveringen van <span th:text="${userName}"></span></h1>
+    <a th:href="'../'">
+        <input type="button" class="btn btn-primary" value="Terug naar cursus"></a>
+    <div>
+        <div th:if="${submissions != null && !submissions.isEmpty()}" class="card" th:each="submission:${submissions}">
+            <a th:href="'/user/' + ${submission.opdracht.id} + '/' + ${userId} + '/' + 'task-feedback'">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${submission.getOpdracht().getTitel()}"></h5>
+                    <p class="card-text textColor">
+                        <b>Moeilijkheidsbeoordeling: </b><span
+                            th:text="${submission.getBeoordeling().isEmpty()}?'/':${submission.getBeoordeling()}"></span><br>
+                        <b>Feedback: </b><span
+                            th:text="${submission.getFeedback() != null}?${submission.getFeedback()}:'/'"></span>
+                    </p>
+                </div>
+            </a>
+        </div>
+        <div th:unless="${submissions != null && !submissions.isEmpty()}">
+            <p>Deze gebruiker heeft nog geen inzendingen</p>
+        </div>
+    </div>
+</main>
+<footer th:replace="fragments/footer.html :: footer"></footer>
+</body>
+</html>

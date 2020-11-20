@@ -1,0 +1,29 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Register</title>
+</head>
+<body>
+<form th:action="|/user/register|" method="post">
+
+    <div class="venueinfo">
+        <div class="infoLine">
+            <div class="infoLineName"><label for="email">email:</label></div>
+            <div class="infoLineValue">
+                <input id="email" name="email" />
+            </div>
+        </div>
+        <div class="infoLine">
+            <div class="infoLineName"><label for="password">password:</label></div>
+            <div class="infoLineValue">
+                <input id="password" name="password" type="password"/>
+            </div>
+        </div>
+    </div>
+    <input class="buttonLook editButton horizontal" type="submit" value="register"/>
+    <a href="/" class="buttonLook editButton horizontal">cancel</a>
+</form>
+</body>
+</html>

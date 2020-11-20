@@ -1,0 +1,24 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Startpagina</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="all" href="/css/default.css" th:href="@{/css/default.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/startpages.css"/>
+</head>
+<body>
+<header></header>
+<main>
+    <a href="/"><img id="logo" class="logo" th:src="'/images/babiligroen300.png'" alt="Babili logo"></a>
+    <h1 class="title">Account aanmaken</h1>
+    <h2>IK BEN EEN:</h2>
+    <a id="student" class="tile" href="/register/student"><div class="tile-icon"><i class="material-icons-round md-small md-dark">school</i></div><span>Cursist</span></a>
+    <a id="docent" class="tile" href="/register/teacher"><div class="tile-icon"><i class="material-icons-round md-small md-dark">vpn_key</i></div><span>Docent</span></a>
+</main>
+<footer th:replace="fragments/footer.html :: footer"></footer>
+</body>
+</html>

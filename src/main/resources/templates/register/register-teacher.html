@@ -1,0 +1,51 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Registreren als docent</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="all" href="/css/default.css" th:href="@{/css/default.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/startpages.css" />
+</head>
+<body>
+<header></header>
+<main>
+    <a href="/"><img id="logo" class="logo" th:src="'/images/babiligroen300.png'" alt="Babili logo"></a>
+    <h1 class="title">Registreren als docent</h1>
+    <form id="formRegister" th:action="|/register/teacher|" method="post">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputUserName">Gebruikersnaam</label>
+                <input required type="text" name="userName" class="form-control" id="inputUserName" placeholder="Gelieve uw gebruikersnaam in te geven.">
+                <span th:if="${userAlreadyInUse != null}" th:text="${userAlreadyInUse}" class="font-weight-bold text-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputName">Naam</label>
+                <input required type="text" name="name" class="form-control" id="inputName" placeholder="Gelieve uw naam in te geven.">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputEmail">E-mail</label>
+            <input required type="email" name="email" class="form-control" id="inputEmail" placeholder="Gelieve uw email adres in te geven.">
+            <span th:if="${emailInUse != null}" th:text="${emailInUse}" class="font-weight-bold text-danger"></span>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputPassword1">Paswoord</label>
+                <input required type="password" name="password" th:class="${classDanger}" id="inputPassword1" placeholder="Gelieve uw wachtwoord in te geven.">
+                <span th:if="${passwordNotOK != null}" th:text="${passwordNotOK}" class="font-weight-bold text-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputPassword2">Typ password opnieuw</label>
+                <input required type="password" name="password2" th:class="${classDanger}" id="inputPassword2"  placeholder="Gelieve uw wachtwoord te herhalen.">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Registreren</button>
+    </form>
+</main>
+<footer th:replace="fragments/footer.html :: footer"></footer>
+</body>
+</html>

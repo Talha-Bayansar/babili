@@ -1,0 +1,68 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Taak ingeleverd</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="all" href="/css/default.css" th:href="@{/css/default.css}"/>
+    <link rel="stylesheet" type="text/css" media="all" href="/css/tasks.css"/>
+    <script type="text/javascript" src="/js/slider.js" defer></script>
+</head>
+<body>
+<header></header>
+<div id="sidebar">
+    <a href="/" class="logo-link"><img id="logo" alt="Babili" th:src="@{'/images/babiligroen300.png'}"></a>
+    <h1 id="navTitle">Navigatie</h1>
+    <button id="btnToggle" class="navbar-toggler material-icons-round md-small md-dark" type="button"
+            data-toggle="collapse" data-target="#collapseToggle"
+            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        menu
+    </button>
+    <nav id="navToggle" class="nav navbar navbar-light">
+        <div id="collapseToggle" class="collapse navbar-collapse">
+            <a class="navbarItem btn" href="/">
+                <i class="material-icons-round md-small md-dark">home</i>
+                <span class="navbarName">Startpagina</span>
+            </a>
+            <a class="navbarItem btn active" sec:authorize="hasAuthority('STUDENT')" href="/user/overview-tasks">
+                <i class="material-icons-round md-small md-dark">format_list_bulleted</i>
+                <span class="navbarName">Opdrachten</span>
+            </a>
+            <a class="navbarItem btn active" sec:authorize="hasAuthority('TEACHER')" href="/user/overview-tasks">
+                <i class="material-icons-round md-small md-dark">format_list_bulleted</i>
+                <span class="navbarName">Cursussen</span>
+            </a>
+            <a class="navbarItem btn" href="/user/logout">
+                <i class="material-icons-round md-small md-dark">exit_to_app</i>
+                <span class="navbarName">Afmelden</span>
+            </a>
+        </div>
+    </nav>
+</div>
+<main>
+    <h1 th:text="${task.getTitel()}"></h1>
+    <div class="task">
+        <div class="task-card"><span class="task-content" th:text="${task.getOpgave()}">
+          </span>
+        </div>
+    </div>
+    <form id="difficulty-rating" th:action="@{'confirmation'}" method="get">
+        <p>Hoe moeilijk vond je deze opdracht?</p>
+        <div id="rating">
+            <span id="ratingText"></span>
+            <div class="progress">
+                <div id="ratingBar" class="progress-bar" role="progressbar" aria-valuenow="4" aria-valuemin="0"
+                     aria-valuemax="4">
+                </div>
+            </div>
+            <input id="ratingSlider" type="range" min="0" max="4" value="2" title="rating" name="rating">
+        </div>
+        <button type="submit" class="btn btn-primary">Beoordeel</button>
+    </form>
+</main>
+<footer th:replace="fragments/footer.html :: footer"></footer>
+</body>
+</html>

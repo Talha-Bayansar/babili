@@ -1,0 +1,54 @@
+@media screen and (min-width: 991px) {
+    form#formRegister, form#formLogin{
+        width: 80%;
+    }
+
+    form#formRegister{
+        max-width: 800px;
+    }
+
+    form#formLogin{
+        max-width: 500px;
+    }
+}
+
+body{
+    display: grid;
+    grid-template-columns: [start] 100% [end] !important;
+}
+
+header{
+    grid-column: start / end !important;
+}
+
+main{
+    grid-column: start / end !important;
+    text-align: center;
+}
+
+form{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+footer{
+    grid-column: start / end !important;
+}
+
+#logo{
+    width: 100%;
+}
+
+a{
+    color: var(--color-logo-dark);
+}
+
+a:hover{
+    color: var(--color-logo-dark);
+}
+
+#formLogout{
+    width: fit-content;
+}
